@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: top_customers
+    description: "Aggregated gold-level model for top spending customers"
+    columns:
+      - name: customer_key
+        description: "Unique identifier for each customer"
+        tests:
+          - not_null
+          - unique
+
+      - name: total_spend
+        description: "Sum of customer spend across all orders"
+        tests:
+          - not_null
+
+    tests:
+      # - assert_row_count_equals:
+      #     expected_count: 15000
+      - assert_row_count_greater_than:
+          min_count: 100
